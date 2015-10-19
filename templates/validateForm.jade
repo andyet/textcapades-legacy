@@ -1,0 +1,18 @@
+extends ./layout-public
+
+block body
+
+  .container
+    h1 Welcome, #{user.name}.
+    h4 The textcapade is about to begin!
+
+    form(method="POST", action="/user/" + user.id + "/phone")
+      fieldset
+        legend Start play using SMS
+        input(type='hidden', name='validate_key', value=user.validate_key)
+        input.form-input(name="phone", required=true, type="text", placeholder="Enter your phone number, including area code. Ex. 555-555-5555")
+        p International numbers include '+' and country code.
+        input(name="id", hidden=true, value=user.id)
+        button.button.button-outlined-themed(name="submit", type="submit") Start Play
+      .align-right
+        a(href='/activate/#{user.validate_key}/slack') I'd prefer not to play using SMS.

@@ -1,0 +1,18 @@
+extends ./layout
+
+block body
+
+  h1 Create Message
+
+  form(method="POST", action="/moderator/author/story/" + episodeId + "/" + templateId + "/" + "create-message")
+
+    label(for="content") Content (interpolate data in jade style braces {user.name})
+    input.form-element(name="content", type="text", required, placeholder="Message Content")
+
+	label(for="wait") Wait before sending (seconds)
+    input.form-element(name="wait", type="text", required, placeholder="5")
+
+
+    input.form-element(name="episodeId", hidden=true, value=episodeId)
+    input.form-element(name="series_id", hidden=true, value=templateId)
+    button.button.button-outlined-themed(name="submit", type="submit") Create Message

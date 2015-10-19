@@ -1,0 +1,25 @@
+extends ./layout
+
+block body
+
+  .container
+
+    h1 #{episodeName}
+    a(href="#new-messages") Go To Bottom
+    form(method="POST")
+      fieldset
+
+        if oldStory
+          for message in oldStory
+            p #{message}
+        a(name="new-messages")
+          if newStory
+            for message in newStory
+              p
+                strong #{message}
+
+        select.form-element(name="option")
+          option(value="") --- Choose response ---
+          for option in options
+            option(value=option) #{option}
+        button.button.button-outlined-themed(name="submit", type="submit") Regenerate Episode

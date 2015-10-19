@@ -1,0 +1,338 @@
+/*--------------------------------------------------------------------
+*
+* Textcapades
+*
+* An &yetConf Adventure
+* ❤︎ 
+*
+--------------------------------------------------------------------*/
+
+@import 'yeticss/globals/_colors'
+@import 'yeticss/globals/_variables'
+// @import 'yeticss/globals/_logos'
+
+@import 'yeticss/libraries/normalize'
+
+@import 'yeticss/components/base'
+@import 'yeticss/components/type'
+@import 'yeticss/components/buttons'
+@import 'yeticss/components/icons'
+// @import 'yeticss/components/avatars'
+@import 'yeticss/components/lists'
+@import 'yeticss/components/forms'
+@import 'yeticss/components/grid'
+@import 'yeticss/components/navigation'
+@import 'yeticss/components/messages'
+@import 'yeticss/components/tables'
+
+/*------------------------------------------------------------------*/
+
+//-----------------------------
+// Typography
+
+a
+  strong
+    color: $blue
+    &:hover
+      color: darken($blue, 20%)
+      
+hr
+  border: none
+  height: 1px
+  color: $gray-lighter
+  background-color: $gray-lighter
+
+//-----------------------------
+// Variables
+
+$conf-yellow = #fcc941
+$conf-gray-light = #f7f7f8
+
+white(alpha)
+  rgba(255,255,255,alpha)
+
+//-----------------------------
+// Buttons
+
+.button
+  margin-right: 10px
+
+.button-outlined-themed
+  background: white
+  color: $conf-yellow
+  border-color: $conf-yellow
+
+  &:hover
+    color: white
+    background: $conf-yellow
+
+.button-small
+  padding: 5px 10px
+
+.button-group-themed
+  margin-bottom: $space
+
+  .button
+    border-color: $conf-yellow
+    border-width: 3px
+    margin-right: 0
+
+@media screen and (min-width: $breakpoint-smartphone + 1)
+
+  .button-group-themed .button
+    margin-left: -3px
+
+//-----------------------------
+// Helpers
+
+.center
+  text-align: center
+
+.right
+  text-align: right
+
+.mb
+  margin-bottom: $space
+
+.mb2
+  margin-bottom: $space*2
+
+.mb0
+  margin-bottom: 0
+
+.footnote
+  font-style: italic
+  font-size: $font-small
+  
+.align-right
+  text-align: right
+
+//-----------------------------
+// Navigation
+
+.top-nav
+  background: $conf-yellow
+
+  a
+    color: $gray-darker
+
+  & > li:last-of-type
+    padding-right: 0
+
+  .icon-arrow-down
+    border-top-color: $gray-dark
+
+  ul.dropdown
+    background: $conf-yellow
+    text-align: left
+    min-width: 200px
+
+    li
+      border-top: 1px solid white(.5)
+
+      &:hover
+        background: white(.2)
+
+  @media screen and (max-width: $breakpoint-tablet)
+
+    label, ul > li
+      padding-right: 0
+      
+    .right
+      text-align: left
+
+//-----------------------------
+//  Grid / Sections
+
+.content
+  padding: 0 30px
+
+@media screen and (max-width: $breakpoint-smartphone)
+  .content
+    padding: 0 15px
+
+.container
+  width: 100%
+  margin-bottom: $space
+  max-width: 700px
+
+//-----------------------------
+// Forms
+
+legend
+  font-weight: $font-weight-medium
+  color: $gray-darker
+
+form table
+  margin-bottom: 15px
+
+//-----------------------------
+// Moderator view
+
+.moderator
+
+  .user-list label
+    margin-bottom: 0
+    font-size: $font-base
+    font-weight: $font-weight-regular
+
+  .user-add fieldset
+    background: $conf-gray-light
+
+//-----------------------------
+// Users list
+
+.users
+
+  .user-list
+    justify-content: space-between
+
+  h4
+    margin-bottom: 15px
+
+  .user-item
+    width: 32%
+    margin-bottom: 20px
+    padding: 20px
+    border: $ui-border
+    
+.rtc-name
+  font-size: 12px
+
+  @media screen and (max-width: $breakpoint-desktop)
+    .user-item
+      width: 49%
+
+  @media screen and (max-width: $breakpoint-mid-mobile)
+    .user-item
+      width: 100%
+
+//-----------------------------
+// User detail view
+
+.user-detail
+  margin-bottom: $space
+  
+  .mod-controls
+    .button-outlined-approve
+      margin-right: 10px
+
+  h1
+    margin-bottom: 10px
+    
+  h4
+    margin-bottom: 10px
+
+  .button-group
+    margin-bottom: $space
+    
+  form.assign-next
+    display: inline
+
+  .grid-flex-cell
+    padding: 0
+
+  span
+    display: block
+
+    &.item-label
+      margin-bottom: 5px
+      text-transform: uppercase
+      font-size: $font-small
+      font-weight: $font-weight-bold
+      color: $blue
+
+  .user-history
+    padding: 20px
+    background: $conf-gray-light
+    border: $ui-border
+
+    li
+      padding: 10px 0
+      border-bottom: 1px dotted $gray-light
+
+.history-btn
+  width: 100%
+  display: block
+  margin-bottom: 20px
+
+//-----------------------------
+// States list view
+
+.states-list
+
+  td
+    background: linear-gradient(to right, $conf-gray-light 5px, white 5px)
+    padding-left: 15px
+
+  ul
+    margin: 5px -10px -10px -15px
+
+    li
+      border-top: $ui-border
+      background: linear-gradient(to right, $conf-gray-light 15px, white 15px)
+      padding: 10px
+      padding-left: 25px
+      
+//-----------------------------
+// Public Home Page
+
+.public-header
+  padding: 30px 10%
+  text-align: center
+  .logo
+    margin-top: 30px
+  
+.public-header-secondary
+  padding: 30px 10%
+  text-align: center
+  .logo
+    max-width: 100px
+  
+.andyet-logo
+  width: 75px
+  
+.tropo-logo
+  width: 300px
+
+.homebody
+  padding-top: 35px
+  img
+    margin-bottom: 30px
+  h1
+    font-family: 'alternate-gothic-no-3-d',Arial Narrow,Helvetica,sans-serif
+    text-transform: uppercase
+    margin: 0
+  p
+    font-family: 'aktiv-grotesk-std',helvetica neue,helvetica,arial,sans-serif
+    font-size: 18px
+    a
+      color: #000
+      border-bottom: 2px solid #fcc941
+      &:hover
+        color: #ccc
+  section
+    text-align: center
+    padding: 30px 10%
+    max-width: 1000px
+    margin: 0 auto
+  section.callout
+    border-top: 4px #f7f7f8 solid
+    border-bottom: 4px #f7f7f8 solid
+    padding-bottom: none
+    p.callout-text
+      font-size: 30px
+      font-family: 'alternate-gothic-no-3-d',Arial Narrow,Helvetica,sans-serif
+      margin-bottom: 0
+      
+//-----------------------------
+// User History Page
+  
+.user-history
+  margin-top: 20px
+  .prompt-arrow
+    background-color: $gray
+    color: white
+  .response-arrow
+    background-color: $conf-yellow
+    color: white

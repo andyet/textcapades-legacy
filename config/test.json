@@ -1,0 +1,8 @@
+{
+	"db": {
+	  "connection": {
+	    "database" : "textcapade_test"
+  	  }
+  	},
+  	"testStoryDir": "./story-test/"
+}

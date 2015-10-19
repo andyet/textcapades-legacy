@@ -1,0 +1,10 @@
+extends ./layout-public
+
+block body
+
+  .container
+    h1.center Something went wrong.
+
+    if message
+      .message.mb
+        p=message

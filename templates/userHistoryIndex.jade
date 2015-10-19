@@ -1,0 +1,12 @@
+extends ./layout-public
+
+block body
+
+  .container
+
+    h1 #{user.name}'s History
+
+    for episode in episodes
+      if episode.title != 'episode0'
+        li
+          a(href="/#{user.phone}/#{episode.title}") #{episode.title}

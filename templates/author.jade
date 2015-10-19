@@ -1,0 +1,37 @@
+extends ./layout
+
+block body
+
+  .container
+
+    h1 Author
+
+    p Currently the seeded user has the following attributes:
+    ul
+      li name: Real Name
+      li rtc_name: RTC Name
+      li cohort: alpha
+      li answer_blob { askTerritory: tech republic }
+      li decision_blob { validOptions: ['option 1', 'option 2'] }
+    p You will be able to choose the starting point in each episode so the cohort doesn't matter,
+      | however you will not be able to access the special bit in episode1
+      | that is sent to users from arthaus. This will be fixed soon/eventually.
+
+    p It is also important to note that templates which are linked by the 'continue'
+      | option will NOT require any user input to proceed. In this simulation I left
+      | the continue links to hopefully make the template links more clear and
+      | also for ease of implementation. If you want this changed just let me know!
+
+
+    form(method="POST", action= "/moderator/author/start")
+      fieldset
+        select(name="userId", required)
+          option(value="") --- Choose a user ---
+          each user in users
+            option(value=user.id) #{user.name}
+        select.form-element(name="episodeTitle", required)
+          option(value="") --- Choose an episode ---
+          for episode in episodes
+            option(value=episode.title) #{episode.title}
+
+        button.button.button-outlined-themed(type="submit") Select Episode

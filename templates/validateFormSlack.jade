@@ -1,0 +1,18 @@
+extends ./layout-public
+
+block body
+
+  .container
+    h1 No problem, #{user.name}.
+    h4 You can also play via Slack.
+
+    form(method="POST", action="/activate/#{user.validate_key}/slack")
+      fieldset
+        legend Send me a Slack invite
+        input(type='hidden', name='validate_key', value=user.validate_key)
+        input(type='hidden', name='name', value=user.name)
+        input.form-input(name="email", required=true, type="text", placeholder="Enter Your Email Address")
+        input(name="id", hidden=true, value=user.id)
+        button.button.button-outlined-themed(name="submit", type="submit") Send invite
+    .align-right
+      a(href='https://slack.com/') What's Slack?

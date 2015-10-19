@@ -1,0 +1,26 @@
+extends ./layout-public
+
+block body
+
+  .container
+    h1.center Let's do this.
+
+    form(action='/play', method='post')
+      
+      fieldset
+
+        h4 Request to play textcapades
+
+        .form-element
+          label(for='name') Name
+          input.form-input(type='text' name='name' placeholder='What shall we call you?', required)
+
+        .form-element
+          label(for='email') Email
+          input.form-input(type='text' name='email' placeholder='you@reaweso.me', required)
+
+        button.button.button-outlined-themed(href='/signup') Submit request
+
+    if message
+      .message.mb
+        p=message

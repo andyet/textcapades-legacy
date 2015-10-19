@@ -1,0 +1,11 @@
+extends ./layout
+
+block body
+
+  .container.states-list
+    h1 Episodes
+    table.table-outlined
+      tbody
+        for episode in episodes
+          tr: td
+            a(href='/moderator/episodes/edit/' + episode.id) #{episode.title}

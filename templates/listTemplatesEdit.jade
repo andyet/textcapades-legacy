@@ -1,0 +1,16 @@
+extends ./layout
+
+block body
+
+  h1 Templates
+  a.button.button-outlined-themed(href='/moderator/author/story') Back to All Episodes
+  ul
+    each template in templates
+      li
+        ul
+          li Edit
+            a(href='/moderator/author/story/' + episode.id + '/' + template.id)  #{template.name}
+          li Start #{template.start}
+          li End #{template.end}
+          li Cohort #{template.cohort_name}
+  a.button.button-outlined-themed(href='/moderator/author/story/' + episode.id + '/add-template') Add Template

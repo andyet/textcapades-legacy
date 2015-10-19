@@ -1,0 +1,88 @@
+extends ./layout
+
+block body
+
+  .container
+
+    h1 Edit #{user.name}
+
+    form(method="POST", action="/moderator/update/" + user.id)
+
+      fieldset
+
+        .form-element
+          label(for="name") Name
+          input.form-input(name="name", type="text", value=user.name, required)
+
+        .form-element
+          label(for="rtc_name") Real-Time-Conference Name
+          input.form-input(name="rtc_name", type="text", value=user.rtc_name)
+
+        .form-element
+          label(for="ticketed") Ticket Status
+          select.form-element(name="ticketed")
+            option(value=1) ticket holder
+            option(value=0) not a ticket holder
+
+        .form-element
+          label(for="phone") Phone
+          input.form-input(name="phone", type="text", value=user.phone)
+
+        .form-element
+          label(for="slack_username") Slack username (set phone to slack to use this)
+          input.form-input(name="slack_username", type="text", value=user.slack_username)
+
+        .form-element
+          label(for="email") Email
+          input.form-input(name="email", type="text", value=user.email, required)
+
+        label(for="episode_title") Episode
+        select.form-element(name="episode_title")
+          option(value="") --- Choose an episode ---
+          for episode in episodes
+            if user.episode.title
+              if episode.title != user.episode
+                option(value=episode.title) #{episode.title}
+            else
+              option(value=episode.title) #{episode.title}
+        p.footnote Note: You must update the episode before selecting a template from that episode
+        //- p
+        //-   a(href='/moderator/template/' + user.id) Click to change template
+
+        label(for="next_series_id") Episode template
+        select.form-element(name="next_series_id")
+          if user.nextSeries
+            option(value=user.nextSeries.id) #{user.nextSeries.name}
+          option(value="") --- Choose a template from #{user.episode.title} ---
+          for template in user.episode.series
+            if user.nextSeries
+              if template.name != user.nextSeries.name
+                option(value=template.id) #{template.name}
+            else
+              option(value=template.id) #{template.name}
+
+        label(for="cohort_id") Cohort
+        select(name="cohort_id")
+          if user.cohort_id
+            option(value=user.cohort_id) #{user.cohort_id}
+          option(value="") --- Choose a cohort ---
+          each cohort in cohorts
+            if user.cohort_id !== cohort.id
+              option(value=cohort.id) #{cohort.name}
+            else
+              option(value=cohort.id) #{cohort.name}
+        //-label(for="territory_name") Territory
+        //-select(name="territory_name")
+          //-if user.territory_name
+            //-option(value=user.territory_name) #{user.territory_name}
+          //-option(value="") --- Choose a territory ---
+          //-each territory in territories
+            //-if user.territory_name 
+              //-if territory.name != user.territory_name
+                //-option(value=territory.name) #{territory.name}
+            //-else 
+              //-option(value=territory.name) #{territory.name}
+
+        input(name="redirect", hidden=true, value='moderator')
+        button.button.button-outlined-themed(type="submit") Update User
+

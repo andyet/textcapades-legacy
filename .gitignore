@@ -1,0 +1,7 @@
+node_modules
+client-interview-qs.txt
+textcapade.sublime-project
+.DS_Store
+config/local.json
+npm-debug.log
+todo.txt

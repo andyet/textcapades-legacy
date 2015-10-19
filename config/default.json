@@ -1,0 +1,41 @@
+{
+  "dummyUserPhone": "18005555555",
+  "db": {
+    "client": "pg",
+    "connection": {
+      "host": "localhost",
+      "user": "textcapade",
+      "database": "textcapade",
+      "charset": "utf8"
+    }
+  },
+
+  "postageapp": {
+    "opts": {
+      "content": {
+        "text/plain" : "Text Content",
+        "text/html" : "HTML Content"
+      },
+      "template": "default"
+    }
+  },
+
+  "slack": {
+    "apiUrl": "http://localhost:3001/message"
+  },
+
+  "tropo": {
+    "apiUrl": "http://localhost:8999",
+    "isDummy": true,
+    "appId": "5045504"
+  },
+
+  "tropoToken": "",
+
+  "hostname": "localhost",
+  "port": 8000,
+  "storyDir": "./story/",
+  "fastPlay": true,
+  "messageDelay": 10
+
+}

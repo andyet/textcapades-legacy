@@ -1,0 +1,24 @@
+extends ./layout
+
+block body
+
+  h1 Create Episode
+
+  form(method="POST", action="/moderator/author/story/" + episodeId + "/create-template")
+
+    label(for="name") Name (camelCase)
+    input.form-element(name="name", type="text", required, placeholder="Template Name")
+
+    label(for="validOptions") Options
+    input.form-element(name="validOptions", type="text", required)
+
+    label(for="template-type") Start/End
+    | Start
+    input.form-element(name="template-type", type="checkbox", value="start")
+    label(for="cohort_name") Cohort (if start template)
+    input.form-element(name="cohort_name", type="text")
+    | End
+    input.form-element(name="template-type", type="checkbox", value="end")
+
+    input(name="episodeId", value=episodeId, hidden=true)
+    button.button.button-outlined-themed(name="submit", type="submit") Create Template

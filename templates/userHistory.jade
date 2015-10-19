@@ -1,0 +1,26 @@
+extends ./layout-public-no-logo
+
+block body
+
+  .container
+    h3(style="padding-top: 30px;") Terminus logs
+    p Page #{locals.page} of #{locals.pages}
+
+    table.table-outlined.user-history
+      for message in locals.history
+        tr.user
+          if message.message_type == "send"
+            - character = message.from_character.slice(0, 1).toUpperCase()
+            td.prompt-arrow= character
+              | &nbsp;&gt;
+            td.prompt= message.message
+          else
+            td.response-arrow &lt;
+            td.response= message.message
+
+    if locals.page > 1
+      a(href="?page=#{locals.page - 1}")  &laquo;&nbsp;Previous page&nbsp;
+    if locals.page < locals.pages
+      a(href="?page=#{locals.page + 1}") Next page&nbsp;&raquo;
+
+

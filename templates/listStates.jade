@@ -1,0 +1,18 @@
+extends ./layout
+
+block body
+
+  .states-list.container
+
+    h1 States
+
+    table.table-outlined
+      tbody
+        each state in states
+            tr: td #{state.name}
+              ul.list-unstyled
+                each user in users
+                  - var nextFile = user.next_series_name
+                  if nextFile === state.name
+                    li
+                      a(href='/moderator/' + user.id) #{user.name} - #{user.email}

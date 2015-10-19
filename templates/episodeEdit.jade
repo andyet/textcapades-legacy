@@ -1,0 +1,13 @@
+extends ./layout
+
+block body
+
+  .container
+
+    h1 #{episode.title}
+    form(method="POST", action="/moderator/episode/update/" + episode.id)
+      fieldset
+       .form-element
+          label(for="from_character") Sent From Character (lachesis, atropos, clotho)
+          input.form-input(name="from_character", type="text", value=episode.from_character, required)
+        button.button.button-outlined-themed(name="submit", type="submit") Update Episode

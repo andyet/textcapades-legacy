@@ -1,0 +1,10 @@
+extends ./layout
+
+block body
+
+  h1 Episodes
+  ul
+    each episode in episodes
+      li
+        a(href='/moderator/author/story/' + episode.id) Edit #{episode.title}
+  a.button.button-outlined-themed(href='/moderator/author/story/add-episode') Add Episode

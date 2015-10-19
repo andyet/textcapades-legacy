@@ -1,0 +1,69 @@
+{
+  "name": "textcapade",
+  "version": "1.0.0",
+  "description": "A SMS-based text adventure game. Purposed for RTC 2015",
+  "main": "server.js",
+  "scripts": {
+    "test": "NODE_ENV=test npm run knex seed:run; NODE_ENV=test mocha test/dataValidationTest.js",
+    "knex": "knex",
+    "buildEpisode": "DEBUG=textcapade node buildEpisode",
+    "lint": "eslint .",
+    "mocha": "mocha",
+    "npmls": "npm ls",
+    "validate": "mocha validate/*",
+    "stylus": "stylus public/styl/main.styl -u yeticss -o public/css",
+    "start": "DEBUG=textcapade node server.js",
+    "reset": "make drop-and-migrate; sleep 1; make seed",
+    "dummy": "DEBUG=textcapade node dummy-tropo/server.js"
+  },
+  "author": "Adam, Heather, Fritzy",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.4.0",
+    "axios": "^0.5.4",
+    "bluebird": "^2.9.30",
+    "bookshelf": "^0.8.1",
+    "concat-stream": "^1.5.0",
+    "csv-parse": "^1.0.0",
+    "debug": "^2.2.0",
+    "getconfig": "^2.1.0",
+    "good": "^6.3.0",
+    "good-console": "^5.0.3",
+    "google-libphonenumber": "^1.0.4",
+    "hapi": "^8.6.1",
+    "hoek": "^2.14.0",
+    "jade": "^1.11.0",
+    "joi": "^6.6.1",
+    "knex": "^0.8.6",
+    "lodash": "^3.9.3",
+    "moment": "^2.10.6",
+    "openurl": "^1.1.0",
+    "pg": "^4.4.0",
+    "postageapp": "^1.1.4",
+    "qs": "^4.0.0",
+    "slack-client": "^1.4.1",
+    "string": "^3.3.0",
+    "stylus": "^0.52.0",
+    "uuid": "^2.0.1",
+    "yeticss": "^7.0.4"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andyet/textcapade"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "eslint": "^1.1.0",
+    "eslint-plugin-hapi": "^1.2.0",
+    "git-validate": "^2.0.3",
+    "mocha": "^2.2.5",
+    "resolve": "^1.1.6"
+  },
+  "pre-commit": [
+    "lint",
+    "test",
+    "validate",
+    "npmls"
+  ]
+}

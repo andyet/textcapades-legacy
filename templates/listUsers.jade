@@ -1,0 +1,24 @@
+extends ./layout
+
+block body
+
+  .users
+
+    h1 Users
+    ul.user-list.list-unstyled.grid-flex-container
+      each user in users
+        li.user-item.grid-flex-cell
+          h4
+            a(href='/moderator/' + user.id) #{user.name}
+          form(method="POST", action= "/moderator/update/" + user.id)
+            ul.list-unstyled.mb0
+              li
+                label(for="ticketed") Ticketed 
+                select(name="ticketed")
+                  option(value=1 selected=user.ticketed) Ticketed
+                  option(value=0 selected=!user.ticketed) Not Ticketed
+
+            input(name="redirect", value='users', hidden=true)
+            button.button.button-outlined-themed(type="submit") Update User
+
+

@@ -1,0 +1,89 @@
+extends ./layout
+
+block body
+
+  .moderator
+
+    h1 All users
+    if message
+      .message.mb
+        p=message
+
+    h4.mb0 Bulk Actions
+
+    .grid-flex-container
+
+      .grid-flex-cell.all-users
+
+        form.mb(method="POST", action= "/moderator/bulk")
+
+          label(for="episode") Set Episode for Users
+            select.form-element(name="episode")
+              option(value="") --- Choose an episode ---
+              for episode in episodes
+                option(value=episode.title) #{episode.title}
+
+          table.table-outlined.user-list
+            for user in users
+              tr.user
+                td
+                  input(type="checkbox", name="selectedUsers[]", value=user.id, id= "start_check_" + user.id, checked=false)
+                td
+                  label(for= "start_check_" + user.id)
+                    a.name-link(href="/moderator/#{user.id}") 
+                      | <strong>#{user.name} </strong>
+                      span.rtc-name
+                        if user.slack_username
+                          | (Slack: #{user.slack_username}) 
+                        else if user.phone
+                          | (#{user.phone}) 
+                        else
+                          | (No phone yet)
+                if !user.validated
+                  td(style="color: #aaa") Not validated
+                  td
+                else
+                  if !user.active
+                    td 
+                      a.button.button-small(href="/moderator/start/#{user.id}") Start #{user.name} on #{user.episode.title}
+                    td
+                  else
+                    td
+                      if user.episode
+                       =user.episode.title
+                    td
+                      if user.lastSeries
+                      | #{user.lastSeries.name} | #{moment(user.last_series_completed).fromNow()}
+
+          button.button.button-outlined-themed(name="action", type="submit", value="validate") Send Validation Email
+          button.button.button-outlined-themed(name="action", type="submit", value="episode") Change Episode
+          button.button.button-outlined-themed(name="action", type="submit", value="delete") Delete Users
+
+      .grid-flex-cell-1of3
+
+        form.user-add(method="POST", action="/moderator/add-user")
+          fieldset
+            h3 Add a new user
+
+            .form-element
+              label(for="name") Name
+              input.form-input(name="name", type="text", required)
+
+            .form-element
+              label(for="rtc_name") Real-Time-Conference Name
+              input.form-input(name="rtc_name", type="text")
+
+            .form-element
+              label(for="email") Email
+              input.form-input(name="email", type="email", required)
+
+            .form-element
+              label(for="email") Phone
+              input.form-input(name="phone", type="text")
+
+            .form-element
+              select.form-element(name="ticketed")
+                option(value=1) ticket holder
+                option(value=0) not a ticket holder
+
+            button.button.button-outlined-themed(type="submit") Create User

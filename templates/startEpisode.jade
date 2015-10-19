@@ -1,0 +1,15 @@
+extends ./layout
+
+block body
+
+  .container
+    h1.center #{episodeTitle}
+    form(method="POST", action= "/moderator/author/episode")
+      fieldset
+        select.form-element(name="seriesName", required)
+          option(value="") --- Choose a start template ---
+          for series in startSeries
+            option(value=series.name) #{series.name}
+        input(type="text", hidden=true, name="episodeTitle", value=episodeTitle)
+        input(type="text", hidden=true, name="userId", value=userId)
+        button.button.button-outlined-themed(type="submit") Select Start Template

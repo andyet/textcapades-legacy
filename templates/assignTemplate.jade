@@ -1,0 +1,25 @@
+extends ./layout
+
+block body
+
+  .container
+
+    h1 Assign template
+    p Assign a template from the chosen episode for
+      strong #{user.name}
+
+    form(method="POST", action= "/moderator/update/" + user.id)
+      fieldset
+        label(for="next_series_id") Start template
+        select.form-element(name="next_series_id")
+          if user.nextSeries
+            option(value=user.nextSeries.id) #{user.nextSeries.name}
+          option(value="") --- Choose a template ---
+          for template in templates
+            if user.nextSeries
+              if template.name != user.nextSeries.name
+                option(value=template.id) #{template.name}
+            else
+              option(value=template.id) #{template.name}
+        input(name='redirect', hidden=true, value='moderator')
+        button.button.button-outlined-themed(type="submit") Assign Template

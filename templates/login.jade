@@ -1,0 +1,20 @@
+extends ./layout-public
+
+block body
+
+  .container
+
+    h1.center Please log in
+
+    form.form-inline
+      fieldset
+
+        .form-element
+          label(for='email') Email
+          input.form-input(type='text' id='name')
+
+        .form-element
+          label(for='password') Password
+          input.form-input(type='text' id='password')
+
+        button.button.button-outlined-themed Submit

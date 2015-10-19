@@ -1,0 +1,16 @@
+extends ./layout
+
+block body
+
+  .container
+    h1 #{cohort.name}
+
+    form(method="POST", action= "/moderator/cohorts/remove-users/" + cohort.id)
+      ul
+      each user in users
+        li
+          a(href='/moderator/' + user.id) #{user.name}
+    
+      button.button.button-outlined-themed(name="submit", type="submit") Start Episode
+  Remove users
+    a(href='/moderator/cohorts/add-users/' + cohort.id) Add users

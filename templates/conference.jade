@@ -1,0 +1,36 @@
+extends ./layout
+
+block body
+
+  .moderator
+    h1 Conference mod stuff
+
+    h4.mb0 Send a message
+
+    .grid-flex-container
+
+      .grid-flex-cell-1of3
+
+        form.mb(method="POST" action="/moderator/conference/sendMessage")
+
+          label(for="from_character") From
+            select.form-element(name="from_character" required)
+              option(value="") --- Choose a character ---
+              option(value="lachesis") Lachesis
+              option(value="clotho") Clotho
+              option(value="atropos") Atropos
+
+          input(type="text" name="content" required pattern=".{1,160}" size=120)
+
+          button.button.button-outlined-themed(type="submit") Send Message (160 characters max)
+
+    h4.mb0 Messages sent
+
+      table.table-outlined.user-history
+        for message in locals.conferenceMessages
+          tr.user
+            td.prompt= message.time
+            td.prompt-arrow= message.from_character
+              | &nbsp;&gt;
+            td.prompt= message.content
+

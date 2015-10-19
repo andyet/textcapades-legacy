@@ -1,0 +1,14 @@
+extends ./layout
+
+block body
+
+  h1 Create Episode
+
+  form(method="POST", action="/moderator/author/story/create-episode")
+
+    label(for="title") Title (lowercase, no spaces)
+    input.form-element(name="title", type="text", required, placeholder="Episode Title")
+
+    label(for="from_character") (lachesis, atropos, clotho)
+    input.form-element(name="from_character", type="text", required, placeholder="lachesis")
+    button.button.button-outlined-themed(name="submit", type="submit") Create Episode

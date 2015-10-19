@@ -1,0 +1,134 @@
+extends ./layout
+
+block body
+
+  .user-detail
+
+    .mod-controls.mb
+
+      h1 Details for #{user.name}
+      p
+        <strong>Validation:</strong> #{user.validated} • <strong>Active Play:</strong> #{user.active}
+
+      .button-group.button-group-themed
+        a.button.button-outlined-themed(href='/moderator/edit/' + user.id) Edit User
+        if !user.validated
+          a.button.button-outlined-themed(href='/moderator/validation/' + user.id) Send Validation Email
+          a.button.button-outlined-themed(href='/activate/' + user.validate_key) Direct link to validation url
+
+      .mb
+        if user.active
+          a.button.button.button-outlined(href='/moderator/start/' + user.id) start play #{user.episode.title}
+          a.button.button-outlined-approve(href='/moderator/restart/' + user.id) restart #{user.episode.title}
+        else
+          a.button.button.button-outlined-approve(href='/moderator/start/' + user.id) start play #{user.episode.title}
+          a.button.button-outlined(href='/moderator/restart/' + user.id) restart #{user.episode.title}
+        //- form.assign-next(method="POST", action="/moderator/update/" + user.id)
+        //-   a.button.button-outlined(type='submit') assign next: #{user.NextEpisode.title}
+
+
+    if message
+      .message.mb
+        p=message
+
+    if error
+      .message.message-error.mb
+        p=error
+
+    .grid-flex-container
+
+      .grid-flex-cell
+        
+        table.table-outlined
+          tbody
+            tr: td
+              span.item-label Current Episode
+              span
+                if user.episode
+                   =user.episode.title
+            tr: td
+              span.item-label Most Recent Sent Template
+              span
+                if user.lastSeries
+                  =user.lastSeries.name
+            tr: td
+              span.item-label Valid Options
+              if user.decision_blob
+                - var decisionBlob = user.decision_blob
+                - var validOptions = decisionBlob.validOptions
+                span #{validOptions}
+            tr: td
+              span.item-label Answer Manually for User
+              span
+                form(method='POST', action='/moderator/answer/' + user.id)
+                  .form-element
+                    label(for="user_response") Response
+                    select.form-element(name="user_response")
+                       option(value="") --- Choose a response ---
+                       if user.decision_blob
+                         for option in validOptions
+                           option(value=option) #{option}
+                    button.button.button-outlined-themed(type="submit") Submit Response
+            tr: td
+              span.item-label Next Template To Send
+              span
+                if user.nextSeries
+                  =user.nextSeries.name
+        table.table-outlined
+          tbody
+            tr: td
+              span.item-label User Validation
+              span Validated: #{user.validated}
+              span Key: #{user.validate_key}
+            tr: td
+              span.item-label Ready To Receive
+              span #{user.ready_to_receive}
+        table.table-outlined
+          tbody
+            tr: td
+              span.item-label Cohort
+              span
+                if user.cohort
+                  =user.cohort.name
+            tr: td
+              span.item-label Territory
+              span
+                if user.answer_blob
+                  | #{user.answer_blob.askTerritory}
+            tr: td
+              span.item-label Alignment
+              span
+                if user.alignment
+                  =user.alignment
+        table.table-outlined
+          tbody
+            tr: td
+              span.item-label Phone
+              span #{user.phone}
+            if user.phone === 'slack'
+              tr: td
+                span.item-label Slack username
+                span #{user.slack_username}
+            tr: td
+              span.item-label Email
+              span #{user.email}
+            tr: td
+              span.item-label RTC Name
+              span #{user.rtc_name}
+            tr: td
+              span.item-label Ticket Status
+              span #{user.ticketed}
+
+      .grid-flex-cell.grid-flex-cell-1of3.user-history
+
+        if user.phone === 'slack'
+          a(href='/slack/#{user.slack_username}/history').button.button-outlined-themed.history-btn View Episode Histories
+        else
+          a(href='/#{user.phone}/history').button.button-outlined-themed.history-btn View Episode Histories
+
+        h4 Current Answer History
+        ul.list-unstyled
+          if user.answer_blob
+            - var answerBlob = user.answer_blob
+            each answer, template in answerBlob
+              li At template <strong> #{template} </strong> the user answered <strong> #{answer} </strong>

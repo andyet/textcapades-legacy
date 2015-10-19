@@ -1,0 +1,26 @@
+extends ./layout
+
+block body
+
+  h1 #{template.name}
+  a.button.button-outlined-themed(href='/moderator/author/story/' + episodeId) Back to Episode
+  a.button.button-outlined-themed(href='/moderator/author/story/' + episodeId + '/' + template.id + '/add-message') Add Message
+
+
+  form(method="POST", action="/moderator/author/story/" + episodeId + "/" + template.id + "/update")
+    ul
+      if messages
+        each message in messages
+          li
+            label(for=message.id + 'wait') Wait before sending message (seconds)
+            input.form-input(name=message.id + 'wait', value=message.wait, required)
+            label(for=message.id) Message Content
+            input.form-input(name=message.id, value=message.content, required)
+    - var isStart = template.start
+    - var isEnd = template.end
+    label(for="type") Start/End
+    | Start
+    input.form-element(name="type", type="checkbox", value="start", checked=isStart)
+    | End
+    input.form-element(name="type", type="checkbox", value="end", checked=isEnd)
+    button(name="submit", type="submit") Update Template

@@ -1,0 +1,11 @@
+extends ./layout
+
+block body
+
+  .container.states-list
+    h1 States
+    table.table-outlined
+      tbody
+        each episode in episodes
+          tr: td
+            a(href='/moderator/states/' + episode.id) #{episode.title}
