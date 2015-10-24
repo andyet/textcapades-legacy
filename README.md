@@ -1,6 +1,8 @@
 #textcapades-legacy
 
-This is the original code that ran the textcapade for [andyetconf](http://andyetconf.com).
+This is the original code that ran the textcapade for [&yetConf](http://andyetconf.com).
+
+Textcapade was generously sponsored by [Tropo](https://www.tropo.com).
 
 The textcapade story was written by [Mike Speegle](https://twitter.com/mike_speegle), and directed by [Adam Brault](https://twitter.com/adambrault).
 
@@ -11,8 +13,6 @@ The textcapade website was designed by [Lynn Fisher](https://github.com/lynnandt
 After Heather's Summer ended, and a quick refactoring by [Gar](https://github.com/wraithgar), the codebase was taken over by [Terry Carter](https://github.com/meetthelegend) who took it from prototype with one episode to the finished product that ran up to and through the conference.
 
 Textcapade was operated by [Bear](http://github.com/bear) and [NLF](https://github.com/nlf).
-
-Textcapade was generously sponsored by [Tropo](https://www.tropo.com).
 
 We are releasing this code now because many people wanted to peek under the hood at how we delivered the experience to everyone.  It is not being actively maintained and is considered a legacy codebase.
 
